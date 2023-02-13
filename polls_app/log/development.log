@@ -1,0 +1,120 @@
+  [1m[35m (40.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (29.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4042686100896465855)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230213212357)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE INDEX "index_users_on_username" ON "users" ("username")[0m
+  [1m[35m (21.2ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "question" text NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(4042686100896465855)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4042686100896465855)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230213212357)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (20.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE INDEX "index_users_on_username" ON "users" ("username")[0m
+  [1m[35m (20.1ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "question" text NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (21.0ms)[0m  [1m[35mCREATE TABLE "polls" ("id" bigserial primary key, "poller_id_id" bigint NOT NULL, "title" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_3c3fe7719d"
+FOREIGN KEY ("poller_id_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCREATE INDEX "index_polls_on_poller_id_id" ON "polls" ("poller_id_id")[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "question" text NOT NULL, "poll_id_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_141b8700e9"
+FOREIGN KEY ("poll_id_id")
+  REFERENCES "polls" ("id")
+)[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(4042686100896465855)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4042686100896465855)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230213212357)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE INDEX "index_users_on_username" ON "users" ("username")[0m
+  [1m[35m (18.5ms)[0m  [1m[35mCREATE TABLE "polls" ("id" bigserial primary key, "poller_id_id" bigint NOT NULL, "title" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_3c3fe7719d"
+FOREIGN KEY ("poller_id_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE INDEX "index_polls_on_poller_id_id" ON "polls" ("poller_id_id")[0m
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "question" text NOT NULL, "poll_id_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_141b8700e9"
+FOREIGN KEY ("poll_id_id")
+  REFERENCES "polls" ("id")
+)[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE INDEX "index_questions_on_poll_id_id" ON "questions" ("poll_id_id")[0m
+  [1m[35m (18.8ms)[0m  [1m[35mCREATE TABLE "answerchoices" ("id" bigserial primary key, "question_id_id" bigint NOT NULL, "choice" text NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_667fbda19c"
+FOREIGN KEY ("question_id_id")
+  REFERENCES "questions" ("id")
+)[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE INDEX "index_answerchoices_on_question_id_id" ON "answerchoices" ("question_id_id")[0m
+  [1m[35m (11.2ms)[0m  [1m[35mCREATE TABLE "responses" ("id" bigserial primary key, "responder_id_id" bigint NOT NULL, "response_choice_id_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_9dffd86200"
+FOREIGN KEY ("responder_id_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_7612a5a220"
+FOREIGN KEY ("response_choice_id_id")
+  REFERENCES "answerchoices" ("id")
+)[0m
+  [1m[35m (10.1ms)[0m  [1m[35mCREATE INDEX "index_responses_on_responder_id_id" ON "responses" ("responder_id_id")[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE INDEX "index_responses_on_response_choice_id_id" ON "responses" ("response_choice_id_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230213212357"]]
+  [1m[36mTRANSACTION (7.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-02-13 21:37:02.240899"], ["updated_at", "2023-02-13 21:37:02.240899"]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(4042686100896465855)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4042686100896465855)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230213212357)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.6ms)[0m  [1m[35mDROP TABLE "responses"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE "answerchoices"[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE "questions"[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE "polls"[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE "users"[0m
+  [1m[36mActiveRecord::SchemaMigration Delete All (0.7ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20230213212357"]]
+  [1m[36mTRANSACTION (8.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(4042686100896465855)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4042686100896465855)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230213212357)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (19.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE INDEX "index_users_on_username" ON "users" ("username")[0m
+  [1m[35m (19.7ms)[0m  [1m[35mCREATE TABLE "polls" ("id" bigserial primary key, "poller_id" bigint NOT NULL, "title" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_d10666c949"
+FOREIGN KEY ("poller_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE INDEX "index_polls_on_poller_id" ON "polls" ("poller_id")[0m
+  [1m[35m (19.4ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "question" text NOT NULL, "poll_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_6c530c0079"
+FOREIGN KEY ("poll_id")
+  REFERENCES "polls" ("id")
+)[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE INDEX "index_questions_on_poll_id" ON "questions" ("poll_id")[0m
+  [1m[35m (19.1ms)[0m  [1m[35mCREATE TABLE "answerchoices" ("id" bigserial primary key, "question_id" bigint NOT NULL, "choice" text NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_5611899fff"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+)[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE INDEX "index_answerchoices_on_question_id" ON "answerchoices" ("question_id")[0m
+  [1m[35m (11.6ms)[0m  [1m[35mCREATE TABLE "responses" ("id" bigserial primary key, "responder_id" bigint NOT NULL, "response_choice_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_922bec6f46"
+FOREIGN KEY ("responder_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_6aa2594f73"
+FOREIGN KEY ("response_choice_id")
+  REFERENCES "answerchoices" ("id")
+)[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE INDEX "index_responses_on_responder_id" ON "responses" ("responder_id")[0m
+  [1m[35m (8.3ms)[0m  [1m[35mCREATE INDEX "index_responses_on_response_choice_id" ON "responses" ("response_choice_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230213212357"]]
+  [1m[36mTRANSACTION (9.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4042686100896465855)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
